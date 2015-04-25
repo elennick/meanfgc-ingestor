@@ -1,4 +1,4 @@
-package com.evanlennick.meanfgc.models;
+package com.evanlennick.meanfgc.dao.models;
 
 import org.jongo.marshall.jackson.oid.ObjectId;
 
@@ -14,7 +14,7 @@ public class Player {
     public Player() {
 
     }
-    
+
     public Player(String character, String player) {
         this.character = character;
         this.player = player;
