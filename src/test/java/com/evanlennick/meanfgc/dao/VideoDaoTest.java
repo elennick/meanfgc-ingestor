@@ -2,52 +2,37 @@ package com.evanlennick.meanfgc.dao;
 
 import com.evanlennick.meanfgc.dao.models.Player;
 import com.evanlennick.meanfgc.dao.models.Video;
-import com.mongodb.DB;
-import com.mongodb.MongoClient;
-import org.jongo.Jongo;
-import org.jongo.MongoCollection;
+import com.google.inject.Guice;
+import com.google.inject.Inject;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import java.net.UnknownHostException;
 import java.util.Arrays;
 import java.util.Date;
 
 import static org.fest.assertions.api.Assertions.assertThat;
-import static org.testng.Assert.fail;
 
 public class VideoDaoTest {
 
-    DB db;
-
-    Jongo jongo;
+    private VideoDao dao;
 
     @BeforeClass
     public void setup() {
-        try {
-            db = new MongoClient().getDB("meanfgc-dev");
-            jongo = new Jongo(db);
-        } catch (UnknownHostException uhe) {
-            fail(uhe.getMessage());
-            uhe.printStackTrace();
-        }
+        dao = Guice.createInjector().getInstance(VideoDao.class); //todo get testng working with guice so we can do field injection instead here
     }
 
     @AfterClass
     public void cleanup() {
-        MongoCollection videos = jongo.getCollection("videos");
-        videos.remove("{ videoId : 'test-video-id' }");
+        dao.deleteVideoByVideoId("test-video-id");
     }
 
     @Test
     public void testSavingVideo() {
         Video videoSaved = createTestVideo();
+        dao.saveVideo(videoSaved);
 
-        MongoCollection videos = jongo.getCollection("videos");
-        videos.save(videoSaved);
-
-        Video videoGotten = videos.findOne("{ videoId : 'test-video-id' }").as(Video.class);
+        Video videoGotten = dao.getVideoByVideoId("test-video-id");
 
         assertThat(videoGotten).isLenientEqualsToByIgnoringFields(videoSaved, "players");
         assertThat(videoGotten.getPlayers()).hasSameSizeAs(videoSaved.getPlayers());

@@ -48,6 +48,13 @@
             <version>3.0</version>
         </dependency>
 
+        <!-- reflections -->
+        <dependency>
+            <groupId>org.reflections</groupId>
+            <artifactId>reflections</artifactId>
+            <version>0.9.9</version>
+        </dependency>
+
         <!-- testing -->
         <dependency>
             <groupId>org.testng</groupId>
