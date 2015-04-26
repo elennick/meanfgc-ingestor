@@ -23,4 +23,20 @@ public class Player extends MongoModel {
                 ", player='" + player + '\'' +
                 '}';
     }
+
+    public String getCharacter() {
+        return character;
+    }
+
+    public void setCharacter(String character) {
+        this.character = character;
+    }
+
+    public String getPlayer() {
+        return player;
+    }
+
+    public void setPlayer(String player) {
+        this.player = player;
+    }
 }
