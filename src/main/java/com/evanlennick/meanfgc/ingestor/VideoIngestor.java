@@ -1,6 +1,6 @@
 package com.evanlennick.meanfgc.ingestor;
 
-import com.evanlennick.meanfgc.dao.VideoDao;
+import com.evanlennick.meanfgc.dao.VideosDao;
 import com.evanlennick.meanfgc.dao.models.Video;
 import com.evanlennick.meanfgc.ingestor.models.VideoPage;
 import com.google.inject.Inject;
@@ -27,7 +27,7 @@ import java.util.*;
 public class VideoIngestor {
 
     @Inject
-    private VideoDao dao;
+    private VideosDao dao;
 
     private SimpleDateFormat rfc3339sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX");
 

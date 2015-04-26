@@ -1,11 +1,6 @@
 package com.evanlennick.meanfgc.dao.models;
 
-import org.jongo.marshall.jackson.oid.ObjectId;
-
-public class Player {
-
-    @ObjectId
-    private String _id;
+public class Player extends MongoModel {
 
     private String character;
 
@@ -15,6 +10,11 @@ public class Player {
 
     }
 
+    public Player(String character, String player) {
+        this.character = character;
+        this.player = player;
+    }
+
     @Override
     public String toString() {
         return "Player{" +
@@ -22,10 +22,5 @@ public class Player {
                 ", character='" + character + '\'' +
                 ", player='" + player + '\'' +
                 '}';
-    }
-
-    public Player(String character, String player) {
-        this.character = character;
-        this.player = player;
     }
 }

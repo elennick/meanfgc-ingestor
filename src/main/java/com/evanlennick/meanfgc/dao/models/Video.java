@@ -1,16 +1,11 @@
 package com.evanlennick.meanfgc.dao.models;
 
-import org.jongo.marshall.jackson.oid.ObjectId;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
-public class Video {
-
-    @ObjectId
-    private String _id;
+public class Video extends MongoModel {
 
     private List<String> title;
 
