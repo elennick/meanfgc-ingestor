@@ -13,6 +13,16 @@ public class VideoPage {
 
     private String channelId;
 
+    private String channelTitle;
+
+    public String getChannelTitle() {
+        return channelTitle;
+    }
+
+    public void setChannelTitle(String channelTitle) {
+        this.channelTitle = channelTitle;
+    }
+
     public List<Video> getVideos() {
         return videos;
     }

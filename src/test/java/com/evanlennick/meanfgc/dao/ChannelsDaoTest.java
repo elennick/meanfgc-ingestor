@@ -22,13 +22,13 @@ public class ChannelsDaoTest {
 
     @AfterClass
     public void cleanup() {
-        dao.deleteChannelByChannelId("1234567890");
+        dao.deleteChannelByChannelId("test channel 1");
     }
 
     @Test
     public void testSavingChannel() {
         Channel channelSaved = new Channel();
-        channelSaved.setChannelId("1234567890");
+        channelSaved.setChannelId("test channel 1");
         channelSaved.setLastUpdated(new Date());
         channelSaved.setName("Test Channel");
         dao.saveModel(channelSaved);
@@ -37,5 +37,10 @@ public class ChannelsDaoTest {
 
         assertThat(channelGotten.isPresent()).isTrue();
         assertThat(channelGotten.get()).isEqualsToByComparingFields(channelSaved);
+    }
+
+    @Test
+    public void testUpdatingExistingChannel() {
+        //todo write this
     }
 }

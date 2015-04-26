@@ -1,6 +1,8 @@
 package com.evanlennick.meanfgc.ingestor;
 
+import com.evanlennick.meanfgc.dao.ChannelsDao;
 import com.evanlennick.meanfgc.dao.VideosDao;
+import com.evanlennick.meanfgc.dao.models.Channel;
 import com.evanlennick.meanfgc.dao.models.Video;
 import com.evanlennick.meanfgc.ingestor.models.VideoPage;
 import com.google.inject.Inject;
@@ -27,7 +29,10 @@ import java.util.*;
 public class VideoIngestor {
 
     @Inject
-    private VideosDao dao;
+    private VideosDao videoDao;
+
+    @Inject
+    private ChannelsDao channelsDao;
 
     private SimpleDateFormat rfc3339sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX");
 
@@ -36,14 +41,19 @@ public class VideoIngestor {
      */
     public void ingestSource(VideoSource source) {
         String channelId = source.getChannelId();
+        String channelName = null;
 
         try {
             String pageToken = "";
 
             while (null != pageToken) {
                 VideoPage videoPage = this.getVideoPageForChannel(channelId, pageToken);
+                if(StringUtils.isEmpty(channelName)) {
+                    channelName = videoPage.getChannelTitle();
+                }
+
                 List<Video> videos = source.parseVideoList(videoPage.getVideos());
-                dao.saveVideos(videos);
+                videoDao.saveVideos(videos);
 
                 if (videoPage.getNextPageToken().isPresent()) {
                     pageToken = videoPage.getNextPageToken().get();
@@ -52,7 +62,11 @@ public class VideoIngestor {
                 }
             }
 
-            //channelDao.saveLastUpdated()
+            Channel channel = new Channel();
+            channel.setChannelId(channelId);
+            channel.setName(channelName);
+            channel.setLastUpdated(new Date());
+            channelsDao.save(channel);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -93,6 +107,10 @@ public class VideoIngestor {
                 video.setDescription(Arrays.asList(itemSnippetJson.getString("description")));
                 video.setTitle(Arrays.asList(itemSnippetJson.getString("title")));
                 video.setPostedBy(itemSnippetJson.getString("channelTitle"));
+
+                if(null == videoPage.getChannelTitle()) {
+                    videoPage.setChannelTitle(itemSnippetJson.getString("channelTitle"));
+                }
 
                 try {
                     video.setPostDate(rfc3339sdf.parse(itemSnippetJson.getString("publishedAt")));

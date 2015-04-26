@@ -18,4 +18,13 @@ public class ChannelsDao extends MongoDao<Channel> {
     public void deleteChannelByChannelId(String channelId) {
         getCollection().remove("{ youtube_id : '" + channelId + "' }");
     }
+
+    public void save(Channel channel) {
+        Optional<Channel> channelGotten = this.getChannelByChannelId(channel.getChannelId());
+        if (channelGotten.isPresent()) {
+            channel.setId(channelGotten.get().getId());
+        }
+
+        this.saveModel(channel);
+    }
 }
