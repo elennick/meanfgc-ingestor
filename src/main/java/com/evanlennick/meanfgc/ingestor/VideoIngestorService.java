@@ -26,7 +26,7 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 @Singleton
-public class VideoIngestor {
+public class VideoIngestorService {
 
     @Inject
     private VideosDao videoDao;
@@ -52,8 +52,12 @@ public class VideoIngestor {
                     channelName = videoPage.getChannelTitle();
                 }
 
-                List<Video> videos = source.parseVideoList(videoPage.getVideos());
-                videoDao.saveVideos(videos);
+                List<Video> parsedVideos = new ArrayList<>();
+                for (Video unparsedVideo : videoPage.getVideos()) {
+                    Video parsedVideo = source.parseVideo(unparsedVideo);
+                    parsedVideos.add(parsedVideo);
+                }
+                videoDao.saveVideos(parsedVideos);
 
                 if (videoPage.getNextPageToken().isPresent()) {
                     pageToken = videoPage.getNextPageToken().get();

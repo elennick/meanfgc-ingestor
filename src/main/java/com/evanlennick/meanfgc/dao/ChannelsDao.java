@@ -1,11 +1,15 @@
 package com.evanlennick.meanfgc.dao;
 
 import com.evanlennick.meanfgc.dao.models.Channel;
+import com.google.inject.Inject;
+import com.google.inject.Singleton;
 
 import java.util.Optional;
 
+@Singleton
 public class ChannelsDao extends MongoDao<Channel> {
 
+    @Inject
     public ChannelsDao() {
         super("channels");
     }

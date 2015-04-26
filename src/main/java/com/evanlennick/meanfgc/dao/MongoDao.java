@@ -16,7 +16,7 @@ abstract public class MongoDao<T extends MongoModel> {
 
     public MongoDao(String collectionName) {
         try {
-            DB db = new MongoClient().getDB("meanfgc-dev");
+            DB db = new MongoClient().getDB("meanfgc-dev"); //todo move this into a config file or something
             jongo = new Jongo(db);
         } catch (UnknownHostException uhe) {
             uhe.printStackTrace();
@@ -26,6 +26,7 @@ abstract public class MongoDao<T extends MongoModel> {
     }
 
     protected void saveModel(T model) {
+        System.out.println("saving model = " + model);
         collection.save(model);
     }
 

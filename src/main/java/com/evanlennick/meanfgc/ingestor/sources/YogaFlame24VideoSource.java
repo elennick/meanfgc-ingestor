@@ -1,9 +1,11 @@
 package com.evanlennick.meanfgc.ingestor.sources;
 
-import com.evanlennick.meanfgc.ingestor.VideoSource;
 import com.evanlennick.meanfgc.dao.models.Video;
+import com.evanlennick.meanfgc.ingestor.Game;
+import com.evanlennick.meanfgc.ingestor.VideoIngestorUtils;
+import com.evanlennick.meanfgc.ingestor.VideoSource;
 
-import java.util.List;
+import java.util.Optional;
 
 public class YogaFlame24VideoSource implements VideoSource {
 
@@ -13,11 +15,27 @@ public class YogaFlame24VideoSource implements VideoSource {
     }
 
     @Override
-    public List<Video> parseVideoList(List<Video> videos) {
-        for (Video video : videos) {
-            System.out.println("video = " + video);
+    public Video parseVideo(Video video) {
+        //parse game
+        Optional<Game> gameOptional = VideoIngestorUtils.parseGameFromTitle(video.getTitle().get(0));
+        if (gameOptional.isPresent()) {
+            video.setGame(gameOptional.get().getName());
+        } else {
+            video.setGame("Unknown");
         }
 
-        return videos;
+        //parse players
+        //todo redo this more smartly with regex or something?
+        if(gameOptional.isPresent()) {
+
+        }
+
+        //parse event
+        //todo
+
+        //parse type
+        //todo
+
+        return video;
     }
 }

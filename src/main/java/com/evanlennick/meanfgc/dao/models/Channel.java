@@ -14,6 +14,15 @@ public class Channel extends MongoModel {
     @JsonProperty(value="youtube_id")
     private String channelId;
 
+    @Override
+    public String toString() {
+        return "Channel{" +
+                "name='" + name + '\'' +
+                ", lastUpdated=" + lastUpdated +
+                ", channelId='" + channelId + '\'' +
+                '}';
+    }
+
     public String getName() {
         return name;
     }

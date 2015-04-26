@@ -1,6 +1,6 @@
 package com.evanlennick.meanfgc;
 
-import com.evanlennick.meanfgc.ingestor.VideoIngestor;
+import com.evanlennick.meanfgc.ingestor.VideoIngestorService;
 import com.evanlennick.meanfgc.ingestor.VideoSource;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
@@ -25,7 +25,7 @@ public class Main {
             videoSources.add(sourceInstance);
         }
 
-        VideoIngestor ingestor = injector.getInstance(VideoIngestor.class);
+        VideoIngestorService ingestor = injector.getInstance(VideoIngestorService.class);
         for (VideoSource videoSource : videoSources) {
             ingestor.ingestSource(videoSource);
         }

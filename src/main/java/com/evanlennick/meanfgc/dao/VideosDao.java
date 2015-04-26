@@ -1,6 +1,7 @@
 package com.evanlennick.meanfgc.dao;
 
 import com.evanlennick.meanfgc.dao.models.Video;
+import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
 import java.util.List;
@@ -9,6 +10,7 @@ import java.util.Optional;
 @Singleton
 public class VideosDao extends MongoDao<Video> {
 
+    @Inject
     public VideosDao() {
         super("videos");
     }
