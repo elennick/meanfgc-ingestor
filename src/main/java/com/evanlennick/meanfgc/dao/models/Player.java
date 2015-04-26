@@ -15,6 +15,15 @@ public class Player {
 
     }
 
+    @Override
+    public String toString() {
+        return "Player{" +
+                "_id='" + _id + '\'' +
+                ", character='" + character + '\'' +
+                ", player='" + player + '\'' +
+                '}';
+    }
+
     public Player(String character, String player) {
         this.character = character;
         this.player = player;

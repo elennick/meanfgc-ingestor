@@ -31,6 +31,9 @@ public class VideoIngestor {
 
     private SimpleDateFormat rfc3339sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX");
 
+    /**
+     * Execute ingestion on a single VideoSource.
+     */
     public void ingestSource(VideoSource source) {
         String channelId = source.getChannelId();
 
@@ -40,7 +43,7 @@ public class VideoIngestor {
             while (null != pageToken) {
                 VideoPage videoPage = this.getVideoPageForChannel(channelId, pageToken);
                 List<Video> videos = source.parseVideoList(videoPage.getVideos());
-//              dao.saveVideos(videos);
+                dao.saveVideos(videos);
 
                 if (videoPage.getNextPageToken().isPresent()) {
                     pageToken = videoPage.getNextPageToken().get();
@@ -55,8 +58,10 @@ public class VideoIngestor {
         }
     }
 
+    /**
+     * Parses through the json for one "page" worth of items returned from youtube.
+     */
     public VideoPage getVideoPageForChannel(String channelId, String pageToken) throws IOException {
-
         VideoPage videoPage = new VideoPage();
         videoPage.setChannelId(channelId);
         videoPage.setVideos(new ArrayList<>());
@@ -103,6 +108,9 @@ public class VideoIngestor {
         return videoPage;
     }
 
+    /**
+     * Make an api call to the youtube api and return the json.
+     */
     private JSONObject getJsonForVideoPage(String channelId, String pageToken) throws IOException {
         CloseableHttpResponse response = null;
         JSONObject jsonObject;

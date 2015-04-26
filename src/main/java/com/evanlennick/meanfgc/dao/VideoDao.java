@@ -21,7 +21,11 @@ public class VideoDao extends MongoDao {
 
     public void saveVideos(List<Video> videos) {
         for (Video video : videos) {
-            videoCollection.save(video);
+            try {
+                videoCollection.save(video);
+            } catch(Exception e) {
+                System.out.println("Error saving video because -> " + e.getMessage());
+            }
         }
     }
 

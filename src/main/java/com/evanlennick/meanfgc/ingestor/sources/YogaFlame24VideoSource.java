@@ -18,6 +18,6 @@ public class YogaFlame24VideoSource implements VideoSource {
             System.out.println("video = " + video);
         }
 
-        return null;
+        return videos;
     }
 }
