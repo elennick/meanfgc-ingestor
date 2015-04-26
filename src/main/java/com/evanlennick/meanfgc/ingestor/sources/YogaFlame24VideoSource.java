@@ -14,6 +14,10 @@ public class YogaFlame24VideoSource implements VideoSource {
 
     @Override
     public List<Video> parseVideoList(List<Video> videos) {
+        for (Video video : videos) {
+            System.out.println("video = " + video);
+        }
+
         return null;
     }
 }

@@ -2,6 +2,8 @@ package com.evanlennick.meanfgc.dao.models;
 
 import org.jongo.marshall.jackson.oid.ObjectId;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -27,6 +29,42 @@ public class Video {
     private String event;
 
     private String type;
+
+    public Video() {
+
+    }
+
+    public Video(String videoId, String title, String description, Date postDate,
+                 String game, String event, String type, Player player1, Player player2) {
+
+        this.videoId = videoId;
+        this.title = Arrays.asList(title);
+        this.description = Arrays.asList(description);
+        this.postDate = postDate;
+        this.game = game;
+        this.event = event;
+        this.type = type;
+
+        this.players = new ArrayList<>();
+        this.players.add(player1);
+        this.players.add(player2);
+    }
+
+    @Override
+    public String toString() {
+        return "Video{" +
+                "_id='" + _id + '\'' +
+                ", title=" + title +
+                ", description=" + description +
+                ", players=" + players +
+                ", postDate=" + postDate +
+                ", postedBy='" + postedBy + '\'' +
+                ", game='" + game + '\'' +
+                ", videoId='" + videoId + '\'' +
+                ", event='" + event + '\'' +
+                ", type='" + type + '\'' +
+                '}';
+    }
 
     public List<String> getTitle() {
         return title;
