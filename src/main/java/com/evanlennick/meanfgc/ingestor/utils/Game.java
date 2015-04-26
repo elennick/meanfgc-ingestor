@@ -1,4 +1,4 @@
-package com.evanlennick.meanfgc.ingestor;
+package com.evanlennick.meanfgc.ingestor.utils;
 
 public enum Game {
     USF4("Ultra Street Fighter 4"),

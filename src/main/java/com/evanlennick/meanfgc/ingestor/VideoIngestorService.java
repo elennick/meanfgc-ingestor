@@ -44,9 +44,11 @@ public class VideoIngestorService {
         String channelName = null;
 
         try {
-            String pageToken = "";
+            Optional<String> pageTokenOptional = Optional.empty();
 
-            while (null != pageToken) {
+            do {
+                String pageToken = pageTokenOptional.orElse(null);
+
                 VideoPage videoPage = this.getVideoPageForChannel(channelId, pageToken);
                 if(StringUtils.isEmpty(channelName)) {
                     channelName = videoPage.getChannelTitle();
@@ -58,13 +60,9 @@ public class VideoIngestorService {
                     parsedVideos.add(parsedVideo);
                 }
                 videoDao.saveVideos(parsedVideos);
+                pageTokenOptional = videoPage.getNextPageToken();
 
-                if (videoPage.getNextPageToken().isPresent()) {
-                    pageToken = videoPage.getNextPageToken().get();
-                } else {
-                    pageToken = null;
-                }
-            }
+            } while(pageTokenOptional.isPresent());
 
             Channel channel = new Channel();
             channel.setChannelId(channelId);

@@ -1,5 +1,6 @@
-package com.evanlennick.meanfgc.ingestor;
+package com.evanlennick.meanfgc.ingestor.utils;
 
+import com.evanlennick.meanfgc.ingestor.utils.Game;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.Optional;
