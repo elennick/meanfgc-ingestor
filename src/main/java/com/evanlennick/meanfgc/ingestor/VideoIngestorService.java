@@ -56,8 +56,13 @@ public class VideoIngestorService {
 
                 List<Video> parsedVideos = new ArrayList<>();
                 for (Video unparsedVideo : videoPage.getVideos()) {
-                    Video parsedVideo = source.parseVideo(unparsedVideo);
-                    parsedVideos.add(parsedVideo);
+                    try {
+                        Video parsedVideo = source.parseVideo(unparsedVideo);
+                        parsedVideos.add(parsedVideo);
+                    } catch(Exception e) {
+                        System.out.println("error parsing video " + unparsedVideo.getVideoId() + " -> " + e.getMessage());
+                        parsedVideos.add(unparsedVideo);
+                    }
                 }
                 videoDao.saveVideos(parsedVideos);
                 pageTokenOptional = videoPage.getNextPageToken();

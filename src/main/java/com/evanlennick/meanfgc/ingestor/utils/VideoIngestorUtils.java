@@ -22,6 +22,8 @@ public class VideoIngestorUtils {
             return Optional.of(Game.SF4);
         } else if (StringUtils.containsIgnoreCase(title, "MKX") || StringUtils.containsIgnoreCase(title, "Mortal Kombat X")) {
             return Optional.of(Game.MKX);
+        }else if (StringUtils.containsIgnoreCase(title, "UMVC3") || StringUtils.containsIgnoreCase(title, "Ultimate Marvel")) {
+            return Optional.of(Game.UMVC3);
         }
 
         return Optional.empty();
