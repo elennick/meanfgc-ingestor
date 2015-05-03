@@ -38,11 +38,21 @@ public class YogaFlame24VideoSourceTest {
         Video usf4Video = new Video();
         usf4Video.setTitle("Gachikun ( Sagat ) Vs UGP HJM ( Dudley ) USF4 1080p - 60fps ✔");
         Video parsedUsf4Video = source.parseVideo(usf4Video);
-        List<Player> players = parsedUsf4Video.getPlayers();
+        List<Player> usf4Players = parsedUsf4Video.getPlayers();
 
-        assertThat(players.get(0).getPlayer()).isEqualTo("Gachikun");
-        assertThat(players.get(0).getCharacter()).isEqualTo("Sagat");
-        assertThat(players.get(1).getPlayer()).isEqualTo("UGP HJM");
-        assertThat(players.get(1).getCharacter()).isEqualTo("Dudley");
+        assertThat(usf4Players.get(0).getPlayer()).isEqualTo("Gachikun");
+        assertThat(usf4Players.get(0).getCharacter()).isEqualTo("Sagat");
+        assertThat(usf4Players.get(1).getPlayer()).isEqualTo("UGP HJM");
+        assertThat(usf4Players.get(1).getCharacter()).isEqualTo("Dudley");
+
+        Video mkxVideo =  new Video();
+        mkxVideo.setTitle("MKX - X6 GRDN Weaponer ( Kano,Cybernetic ) Vs Draman Kuritani ( Erron Black,Outlaw ) 720p ✔");
+        Video parsedMkxVideo = source.parseVideo(mkxVideo);
+        List<Player> mkxPlayers = parsedMkxVideo.getPlayers();
+
+        assertThat(mkxPlayers.get(0).getPlayer()).isEqualTo("GRDN Weaponer");
+        assertThat(mkxPlayers.get(0).getCharacter()).isEqualTo("Kano,Cybernetic");
+        assertThat(mkxPlayers.get(1).getPlayer()).isEqualTo("Draman Kuritani");
+        assertThat(mkxPlayers.get(1).getCharacter()).isEqualTo("Erron Black,Outlaw");
     }
 }

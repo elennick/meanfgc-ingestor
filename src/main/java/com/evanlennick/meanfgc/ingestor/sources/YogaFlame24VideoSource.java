@@ -43,9 +43,21 @@ public class YogaFlame24VideoSource implements VideoSource {
                             new Player(character1, player1),
                             new Player(character2, player2)));
                 }
+                if(Game.MKX.equals(game)) {
+                    String[] splitTitle = StringUtils.split(video.getTitle(), "()");
+                    String player1 = splitTitle[0].substring(8).trim();
+                    String player2 = splitTitle[2].substring(3).trim();
+                    String character1 = splitTitle[1].trim();
+                    String character2 = splitTitle[3].trim();
+
+                    video.setPlayers(Arrays.asList(
+                            new Player(character1, player1),
+                            new Player(character2, player2)));
+                }
             }
         } catch(Exception e) {
             System.out.println("error parsing player/character data for video -> " + e.getMessage());
+            e.printStackTrace();
         }
 
         //parse event
