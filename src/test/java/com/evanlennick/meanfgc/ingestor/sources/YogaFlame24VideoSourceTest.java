@@ -16,17 +16,17 @@ public class YogaFlame24VideoSourceTest {
         YogaFlame24VideoSource source = new YogaFlame24VideoSource();
 
         Video sf4Video = new Video();
-        sf4Video.setTitle(Arrays.asList("This is a title that says Street Fighter 4 in it."));
+        sf4Video.setTitle("This is a title that says Street Fighter 4 in it.");
         Video parsedSf4Video = source.parseVideo(sf4Video);
         assertThat(parsedSf4Video.getGame()).isEqualToIgnoringCase("Street Fighter 4");
 
         Video usf4Video = new Video();
-        usf4Video.setTitle(Arrays.asList("This is a title that says Ultra Street Fighter 4 in it."));
+        usf4Video.setTitle("This is a title that says Ultra Street Fighter 4 in it.");
         Video parsedUsf4Video = source.parseVideo(usf4Video);
         assertThat(parsedUsf4Video.getGame()).isEqualToIgnoringCase("Ultra Street Fighter 4");
 
         Video mkxVideo = new Video();
-        mkxVideo.setTitle(Arrays.asList("This is a title that says mkx in it."));
+        mkxVideo.setTitle("This is a title that says mkx in it.");
         Video parsedMkxVideo = source.parseVideo(mkxVideo);
         assertThat(parsedMkxVideo.getGame()).isEqualToIgnoringCase("Mortal Kombat X");
     }
@@ -36,7 +36,7 @@ public class YogaFlame24VideoSourceTest {
         YogaFlame24VideoSource source = new YogaFlame24VideoSource();
 
         Video usf4Video = new Video();
-        usf4Video.setTitle(Arrays.asList("Gachikun ( Sagat ) Vs UGP HJM ( Dudley ) USF4 1080p - 60fps ✔"));
+        usf4Video.setTitle("Gachikun ( Sagat ) Vs UGP HJM ( Dudley ) USF4 1080p - 60fps ✔");
         Video parsedUsf4Video = source.parseVideo(usf4Video);
         List<Player> players = parsedUsf4Video.getPlayers();
 

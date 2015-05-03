@@ -40,8 +40,8 @@ public class VideosDaoTest {
     private Video createTestVideo() {
         Video video = new Video();
 
-        video.setDescription(Arrays.asList("test description"));
-        video.setTitle(Arrays.asList("test title"));
+        video.setDescription("test description");
+        video.setTitle("test title");
         video.setGame("Test");
         video.setPlayers(Arrays.asList(new Player("test1", "test1"), new Player("test2", "test2")));
         video.setPostDate(new Date());

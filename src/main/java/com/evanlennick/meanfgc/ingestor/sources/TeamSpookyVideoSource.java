@@ -17,7 +17,7 @@ public class TeamSpookyVideoSource implements VideoSource {
 
     @Override
     public Video parseVideo(Video video) {
-        String[] splitTitle = StringUtils.split(video.getTitle().get(0), "-");
+        String[] splitTitle = StringUtils.split(video.getTitle(), "-");
 
         String titleEvent = splitTitle[0].trim();
         String titleGame = splitTitle[1].trim();

@@ -20,7 +20,7 @@ public class YogaFlame24VideoSource implements VideoSource {
     @Override
     public Video parseVideo(Video video) {
         //parse game
-        Optional<Game> gameOptional = VideoIngestorUtils.parseGameFromTitle(video.getTitle().get(0));
+        Optional<Game> gameOptional = VideoIngestorUtils.parseGameFromTitle(video.getTitle());
         if (gameOptional.isPresent()) {
             video.setGame(gameOptional.get().getName());
         } else {
@@ -33,7 +33,7 @@ public class YogaFlame24VideoSource implements VideoSource {
             if (gameOptional.isPresent()) {
                 Game game = gameOptional.get();
                 if (Game.USF4.equals(game)) {
-                    String[] splitTitle = StringUtils.split(video.getTitle().get(0), "()");
+                    String[] splitTitle = StringUtils.split(video.getTitle(), "()");
                     String player1 = splitTitle[0].trim();
                     String player2 = splitTitle[2].substring(3).trim();
                     String character1 = splitTitle[1].trim();

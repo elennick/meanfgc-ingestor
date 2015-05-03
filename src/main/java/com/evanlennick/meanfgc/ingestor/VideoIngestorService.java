@@ -111,8 +111,8 @@ public class VideoIngestorService {
                 Video video = new Video();
 
                 video.setVideoId(itemIdJson.getString("videoId"));
-                video.setDescription(Arrays.asList(itemSnippetJson.getString("description")));
-                video.setTitle(Arrays.asList(itemSnippetJson.getString("title")));
+                video.setDescription(itemSnippetJson.getString("description"));
+                video.setTitle(itemSnippetJson.getString("title"));
                 video.setPostedBy(itemSnippetJson.getString("channelTitle"));
 
                 if(null == videoPage.getChannelTitle()) {

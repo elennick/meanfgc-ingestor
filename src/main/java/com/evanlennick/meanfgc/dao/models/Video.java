@@ -7,9 +7,9 @@ import java.util.List;
 
 public class Video extends MongoModel {
 
-    private List<String> title;
+    private String title;
 
-    private List<String> description;
+    private String description;
 
     private List<Player> players;
 
@@ -33,8 +33,8 @@ public class Video extends MongoModel {
                  String game, String event, String type, Player player1, Player player2) {
 
         this.videoId = videoId;
-        this.title = Arrays.asList(title);
-        this.description = Arrays.asList(description);
+        this.title = title;
+        this.description = description;
         this.postDate = postDate;
         this.game = game;
         this.event = event;
@@ -61,19 +61,19 @@ public class Video extends MongoModel {
                 '}';
     }
 
-    public List<String> getTitle() {
+    public String getTitle() {
         return title;
     }
 
-    public void setTitle(List<String> title) {
+    public void setTitle(String title) {
         this.title = title;
     }
 
-    public List<String> getDescription() {
+    public String getDescription() {
         return description;
     }
 
-    public void setDescription(List<String> description) {
+    public void setDescription(String description) {
         this.description = description;
     }
 
